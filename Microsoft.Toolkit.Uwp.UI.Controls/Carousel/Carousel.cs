@@ -34,7 +34,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         /// </summary>
         public object SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
+            get { return GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
 
@@ -47,15 +47,8 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         /// </summary>
         public int SelectedIndex
         {
-            get
-            {
-                return (int)GetValue(SelectedIndexProperty);
-            }
-
-            set
-            {
-                SetValue(SelectedIndexProperty, value);
-            }
+            get { return (int)GetValue(SelectedIndexProperty); }
+            set { SetValue(SelectedIndexProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SelectedIndex.  This enables animation, styling, binding, etc...
@@ -265,7 +258,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
         /// <returns>Returns always a ContentControl</returns>
         protected override DependencyObject GetContainerForItemOverride()
         {
-            return new ContentControl();
+            return new CarouselItem();
         }
 
         /// <summary>
@@ -439,7 +432,7 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
 
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            return false;
+            return item is CarouselItem;
         }
 
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
@@ -466,12 +459,6 @@ namespace Microsoft.Toolkit.Uwp.UI.Controls
             contentControl.Opacity = 1;
             contentControl.RenderTransformOrigin = new Point(0.5, 0.5);
             contentControl.Tag = "CarouselItem";
-
-            if (contentControl as Control != null)
-            {
-                ((Control)contentControl).IsTabStop = Items.IndexOf(item) == SelectedIndex;
-                ((Control)contentControl).UseSystemFocusVisuals = true;
-            }
 
             PlaneProjection planeProjection = new PlaneProjection();
             planeProjection.CenterOfRotationX = 0.5;

@@ -2,12 +2,44 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="using:Microsoft.Toolkit.Uwp.UI.Controls">
 
+
+  
     <Style TargetType="local:Carousel">
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
                     <local:CarouselPanel />
                 </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerStyle" >
+            <Setter.Value>
+                <Style TargetType="local:CarouselItem">
+                    <Setter Property="TabNavigation" Value="Local"/>
+                    <Setter Property="IsHoldingEnabled" Value="True"/>
+                    <Setter Property="Padding" Value="12,0,12,0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="AllowDrop" Value="False"/>
+                    <Setter Property="UseSystemFocusVisuals" Value="True"/>
+                    <Setter Property="IsTabStop" Value="True" />
+                    <Setter Property="FocusVisualMargin" Value="0"/>
+                    <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource ListViewItemFocusVisualPrimaryBrush}"/>
+                    <Setter Property="FocusVisualPrimaryThickness" Value="2"/>
+                    <Setter Property="FocusVisualSecondaryBrush" Value="{ThemeResource ListViewItemFocusVisualSecondaryBrush}"/>
+                    <Setter Property="FocusVisualSecondaryThickness" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="local:CarouselItem">
+                                <ContentPresenter 
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Control.IsTemplateFocusTarget="True" 
+                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -25,5 +57,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    
 
 </ResourceDictionary>
